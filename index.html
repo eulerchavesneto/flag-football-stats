@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Flag Football Stats</title>
+    <title>Gama Leões de Judá Flag Football</title>
     <style>
         /* Reset e Variáveis */
         * {
@@ -14,15 +14,16 @@
         }
         
         :root {
-            --primary: #2563eb;
-            --secondary: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --dark: #1f2937;
-            --gray: #6b7280;
-            --light: #f3f4f6;
+            --primary: #2d5016;
+            --secondary: #4a7c2e;
+            --accent: #6ba644;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --dark: #000000;
+            --gray: #6c757d;
+            --light: #f8f9fa;
             --white: #ffffff;
-            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
             --radius: 12px;
         }
         
@@ -43,7 +44,8 @@
         
         /* Header */
         .header {
-            background: var(--white);
+            background: var(--dark);
+            color: var(--white);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
@@ -63,7 +65,7 @@
             gap: 0.5rem;
             font-weight: bold;
             font-size: 1.25rem;
-            color: var(--primary);
+            color: var(--white);
         }
         
         .header-actions {
@@ -73,8 +75,7 @@
         
         /* Navigation */
         .nav {
-            background: var(--white);
-            border-top: 1px solid #e5e7eb;
+            background: var(--primary);
             position: sticky;
             top: 60px;
             z-index: 90;
@@ -95,7 +96,7 @@
             flex: 0 0 auto;
             padding: 1rem 1.5rem;
             border-bottom: 3px solid transparent;
-            color: var(--gray);
+            color: var(--white);
             text-decoration: none;
             transition: all 0.2s;
             white-space: nowrap;
@@ -105,11 +106,16 @@
             border-left: none;
             border-right: none;
             font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .nav-item:hover {
+            opacity: 1;
         }
         
         .nav-item.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            border-bottom-color: var(--accent);
+            opacity: 1;
         }
         
         /* Content */
@@ -140,6 +146,7 @@
         .card-title {
             font-size: 1.25rem;
             font-weight: 600;
+            color: var(--primary);
         }
         
         /* Buttons */
@@ -163,6 +170,10 @@
             color: var(--white);
         }
         
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
         .btn-primary:active {
             transform: scale(0.98);
         }
@@ -179,13 +190,18 @@
         
         .btn-warning {
             background: var(--warning);
-            color: var(--white);
+            color: var(--dark);
         }
         
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
         }
         
         .btn-icon {
@@ -300,12 +316,12 @@
         }
         
         .player-item.selected {
-            background: #dbeafe;
-            border-left: 3px solid var(--primary);
+            background: rgba(75, 124, 46, 0.1);
+            border-left: 3px solid var(--secondary);
         }
         
         .player-item.priority {
-            background: #fef3c7;
+            background: rgba(255, 193, 7, 0.1);
         }
         
         .player-avatar {
@@ -354,6 +370,7 @@
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
+            border: 1px solid #e5e7eb;
         }
         
         .stat-label {
@@ -508,6 +525,10 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .logo {
+                font-size: 1rem;
+            }
         }
         
         /* Loading */
@@ -555,9 +576,47 @@
             text-transform: uppercase;
         }
         
-        .position-qb { background: #dbeafe; color: #1e40af; }
-        .position-wr { background: #fed7aa; color: #c2410c; }
-        .position-def { background: #e9d5ff; color: #6b21a8; }
+        .position-qb { background: #e3f2fd; color: #1565c0; }
+        .position-recebedor { background: #fff3e0; color: #e65100; }
+        .position-def { background: #f3e5f5; color: #6a1b9a; }
+        
+        /* Option Buttons */
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--white);
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+        
+        .option-btn.primary {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .option-btn.secondary {
+            background: var(--secondary);
+            color: var(--white);
+            border-color: var(--secondary);
+        }
+        
+        .option-btn.warning {
+            background: var(--warning);
+            color: var(--dark);
+            border-color: var(--warning);
+        }
     </style>
 </head>
 <body>
@@ -566,7 +625,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    ⚡ Flag Football Stats
+                    Gama Leões de Judá Flag Football
                 </div>
                 <div class="header-actions">
                     <button class="btn btn-icon btn-primary" onclick="app.showExportModal()">
@@ -622,7 +681,7 @@
                                 <label class="form-label">Posição</label>
                                 <select class="form-select" id="playerPosition" required>
                                     <option value="QB">Quarterback (QB)</option>
-                                    <option value="WR">Wide Receiver (WR)</option>
+                                    <option value="RECEBEDOR">Recebedor</option>
                                     <option value="DEF">Defensor (DEF)</option>
                                 </select>
                             </div>
@@ -687,7 +746,30 @@
         const app = {
             // Data
             data: {
-                players: [],
+                players: [
+                    { id: '1', name: 'Chuck', number: '22', position: 'RECEBEDOR' },
+                    { id: '2', name: 'Caio', number: '10', position: 'QB' },
+                    { id: '3', name: 'Rai', number: '13', position: 'RECEBEDOR' },
+                    { id: '4', name: 'Victor', number: '87', position: 'DEF' },
+                    { id: '5', name: 'Lino', number: '9', position: 'QB' },
+                    { id: '6', name: 'Rangel', number: '32', position: 'DEF' },
+                    { id: '7', name: 'Santos', number: '84', position: 'RECEBEDOR' },
+                    { id: '8', name: 'Mateus', number: '15', position: 'DEF' },
+                    { id: '9', name: 'Peron', number: '88', position: 'RECEBEDOR' },
+                    { id: '10', name: 'Euler', number: '31', position: 'DEF' },
+                    { id: '11', name: 'Macaco', number: '26', position: 'RECEBEDOR' },
+                    { id: '12', name: 'JP', number: '30', position: 'RECEBEDOR' },
+                    { id: '13', name: 'Lomeu', number: '1', position: 'RECEBEDOR' },
+                    { id: '14', name: 'Rimack', number: '5', position: 'RECEBEDOR' },
+                    { id: '15', name: 'Dauzin', number: '2', position: 'RECEBEDOR' },
+                    { id: '16', name: 'Kevin', number: '33', position: 'RECEBEDOR' },
+                    { id: '17', name: 'Zille', number: '7', position: 'DEF' },
+                    { id: '18', name: 'Rickson', number: '17', position: 'RECEBEDOR' },
+                    { id: '19', name: 'Roger', number: '8', position: 'DEF' },
+                    { id: '20', name: 'PP', number: '99', position: 'RECEBEDOR' },
+                    { id: '21', name: 'Dadau', number: '3', position: 'RECEBEDOR' },
+                    { id: '22', name: 'André', number: '77', position: 'DEF' }
+                ],
                 trainings: [],
                 currentPage: 'dashboard',
                 currentTraining: null,
@@ -709,11 +791,21 @@
             
             // Load data from localStorage
             loadData() {
-                const saved = localStorage.getItem('flagFootballData');
+                const saved = localStorage.getItem('gamaFlagFootballData');
                 if (saved) {
                     try {
                         const parsed = JSON.parse(saved);
-                        this.data = { ...this.data, ...parsed };
+                        // Manter jogadores pré-definidos mas adicionar novos se existirem
+                        if (parsed.players && parsed.players.length > 0) {
+                            // Verificar se são os jogadores padrão ou customizados
+                            const hasCustomPlayers = parsed.players.some(p => parseInt(p.id) > 22);
+                            if (hasCustomPlayers) {
+                                this.data.players = [...this.data.players, ...parsed.players.filter(p => parseInt(p.id) > 22)];
+                            }
+                        }
+                        if (parsed.trainings) {
+                            this.data.trainings = parsed.trainings;
+                        }
                     } catch (e) {
                         console.error('Error loading data:', e);
                     }
@@ -722,7 +814,7 @@
             
             // Save data to localStorage
             saveData() {
-                localStorage.setItem('flagFootballData', JSON.stringify({
+                localStorage.setItem('gamaFlagFootballData', JSON.stringify({
                     players: this.data.players,
                     trainings: this.data.trainings
                 }));
@@ -806,9 +898,9 @@
                         <div class="card">
                             <div class="empty-state">
                                 <div class="empty-icon">📋</div>
-                                <p>Comece adicionando jogadores e criando seu primeiro treino!</p>
-                                <button class="btn btn-primary mt-2" onclick="app.navigate('players')">
-                                    Adicionar Jogadores
+                                <p>Comece criando seu primeiro treino!</p>
+                                <button class="btn btn-primary mt-2" onclick="app.navigate('training')">
+                                    Criar Treino
                                 </button>
                             </div>
                         </div>
@@ -829,38 +921,28 @@
                             </button>
                         </div>
                         
-                        ${players.length > 0 ? `
-                            <ul class="player-list">
-                                ${players.map(player => `
-                                    <li class="player-item">
-                                        <div class="player-avatar">${player.name.charAt(0).toUpperCase()}</div>
-                                        <div class="player-info">
-                                            <div class="player-name">${player.name}</div>
-                                            <div class="player-details">
-                                                <span class="position-badge position-${player.position.toLowerCase()}">${player.position}</span>
-                                                #${player.number}
-                                            </div>
+                        <ul class="player-list">
+                            ${players.map(player => `
+                                <li class="player-item">
+                                    <div class="player-avatar">${player.name.charAt(0).toUpperCase()}</div>
+                                    <div class="player-info">
+                                        <div class="player-name">${player.name}</div>
+                                        <div class="player-details">
+                                            <span class="position-badge position-${player.position.toLowerCase()}">${player.position}</span>
+                                            #${player.number}
                                         </div>
-                                        <div class="player-actions">
-                                            <button class="btn btn-icon btn-small btn-warning" onclick="app.editPlayer('${player.id}')">
-                                                ✏️
-                                            </button>
-                                            <button class="btn btn-icon btn-small btn-danger" onclick="app.deletePlayer('${player.id}')">
-                                                🗑️
-                                            </button>
-                                        </div>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        ` : `
-                            <div class="empty-state">
-                                <div class="empty-icon">👥</div>
-                                <p>Nenhum jogador cadastrado</p>
-                                <button class="btn btn-primary mt-2" onclick="app.openPlayerModal()">
-                                    Adicionar Primeiro Jogador
-                                </button>
-                            </div>
-                        `}
+                                    </div>
+                                    <div class="player-actions">
+                                        <button class="btn btn-icon btn-small btn-warning" onclick="app.editPlayer('${player.id}')">
+                                            ✏️
+                                        </button>
+                                        <button class="btn btn-icon btn-small btn-danger" onclick="app.deletePlayer('${player.id}')">
+                                            🗑️
+                                        </button>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
                 `;
             },
@@ -919,17 +1001,6 @@
             
             // Stats
             renderStats() {
-                if (this.data.players.length === 0) {
-                    return `
-                        <div class="card">
-                            <div class="empty-state">
-                                <div class="empty-icon">📊</div>
-                                <p>Adicione jogadores para ver estatísticas</p>
-                            </div>
-                        </div>
-                    `;
-                }
-                
                 return `
                     <div class="card">
                         <div class="card-header">
@@ -987,9 +1058,17 @@
                                 <div class="stat-label">Flag Pulls</div>
                                 <div class="stat-value">${stats.flagPulls || 0}</div>
                             </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 1pt</div>
+                                <div class="stat-value">${stats.conv1pt || 0}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 2pt</div>
+                                <div class="stat-value">${stats.conv2pt || 0}</div>
+                            </div>
                         `;
                         break;
-                    case 'WR':
+                    case 'RECEBEDOR':
                         html = `
                             <div class="stat-card">
                                 <div class="stat-label">Recepções</div>
@@ -1019,6 +1098,14 @@
                                 <div class="stat-label">Flag Pulls</div>
                                 <div class="stat-value">${stats.flagPulls || 0}</div>
                             </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 1pt</div>
+                                <div class="stat-value">${stats.conv1pt || 0}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 2pt</div>
+                                <div class="stat-value">${stats.conv2pt || 0}</div>
+                            </div>
                         `;
                         break;
                     case 'DEF':
@@ -1038,6 +1125,18 @@
                             <div class="stat-card">
                                 <div class="stat-label">Passes Defletados</div>
                                 <div class="stat-value">${stats.deflections || 0}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">TD Defensivos</div>
+                                <div class="stat-value">${stats.touchdowns || 0}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 1pt</div>
+                                <div class="stat-value">${stats.conv1pt || 0}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Conv 2pt</div>
+                                <div class="stat-value">${stats.conv2pt || 0}</div>
                             </div>
                         `;
                         break;
@@ -1226,17 +1325,23 @@
                         content += this.renderPlayerSelection(null, 'Selecione quem correu');
                         break;
                     case 'selectDefender':
-                        const isDefensivePlay = ['sack', 'interception', 'deflection', 'flagPull'].includes(this.data.gameMode.playType);
+                        const isDefensivePlay = ['sack', 'interception', 'deflection'].includes(this.data.gameMode.playType);
                         content += this.renderPlayerSelection(isDefensivePlay ? 'DEF' : null, 'Selecione o Defensor');
                         break;
-                    case 'selectOffender':
-                        content += this.renderPlayerSelection(null, 'Selecione quem sofreu o Flag Pull');
+                    case 'selectFlagPullDefender':
+                        content += this.renderPlayerSelection('DEF', 'Quem fez o Flag Pull?');
                         break;
                     case 'enterYards':
                         content += this.renderYardInput();
                         break;
-                    case 'touchdown':
-                        content += this.renderTouchdownOption();
+                    case 'scoringPlay':
+                        content += this.renderScoringOption();
+                        break;
+                    case 'flagPull':
+                        content += this.renderFlagPullOption();
+                        break;
+                    case 'defensiveTD':
+                        content += this.renderDefensiveTDOption();
                         break;
                     case 'confirm':
                         content += this.renderPlayConfirmation();
@@ -1275,10 +1380,6 @@
                     <button class="play-type-btn" onclick="app.selectPlayType('run')">
                         <div class="play-type-icon">🏃</div>
                         <span>Corrida</span>
-                    </button>
-                    <button class="play-type-btn" onclick="app.selectPlayType('flagPull')">
-                        <div class="play-type-icon">🚩</div>
-                        <span>Flag Pull</span>
                     </button>
                     <button class="play-type-btn" onclick="app.selectPlayType('sack')">
                         <div class="play-type-icon">💥</div>
@@ -1374,14 +1475,48 @@
                 `;
             },
             
-            renderTouchdownOption() {
+            renderScoringOption() {
                 return `
-                    <h3 class="mb-3">Foi touchdown?</h3>
+                    <h3 class="mb-3">Resultado da jogada:</h3>
                     <div class="mt-3">
-                        <button class="btn btn-primary mb-2" style="width: 100%" onclick="app.setTouchdown(true)">
-                            🏈 Sim, TOUCHDOWN!
+                        <button class="option-btn primary mb-2" onclick="app.setScoring('touchdown')">
+                            🏈 TOUCHDOWN!
                         </button>
-                        <button class="btn btn-outline" style="width: 100%" onclick="app.setTouchdown(false)">
+                        <button class="option-btn secondary mb-2" onclick="app.setScoring('conv1pt')">
+                            ☝️ Conversão de 1 ponto
+                        </button>
+                        <button class="option-btn warning mb-2" onclick="app.setScoring('conv2pt')">
+                            ✌️ Conversão de 2 pontos
+                        </button>
+                        <button class="option-btn" onclick="app.setScoring('none')">
+                            ❌ Nenhum (parado/saiu)
+                        </button>
+                    </div>
+                `;
+            },
+            
+            renderFlagPullOption() {
+                return `
+                    <h3 class="mb-3">Houve flag pull na jogada?</h3>
+                    <div class="mt-3">
+                        <button class="option-btn primary mb-2" onclick="app.setFlagPull(true)">
+                            🚩 Sim
+                        </button>
+                        <button class="option-btn" onclick="app.setFlagPull(false)">
+                            Não
+                        </button>
+                    </div>
+                `;
+            },
+            
+            renderDefensiveTDOption() {
+                return `
+                    <h3 class="mb-3">Foi touchdown defensivo?</h3>
+                    <div class="mt-3">
+                        <button class="option-btn primary mb-2" onclick="app.setDefensiveTD(true)">
+                            🏈 Sim, TD DEFENSIVO!
+                        </button>
+                        <button class="option-btn" onclick="app.setDefensiveTD(false)">
                             Não
                         </button>
                     </div>
@@ -1394,22 +1529,28 @@
                 
                 switch (this.data.gameMode.playType) {
                     case 'completePass':
-                        description = `${play.qb.name} completa passe de ${play.yards} jardas para ${play.receiver.name}${play.touchdown ? ' - TOUCHDOWN!' : ''}`;
+                        description = `${play.qb.name} completa passe de ${play.yards} jardas para ${play.receiver.name}`;
+                        if (play.scoring === 'touchdown') description += ' - TOUCHDOWN!';
+                        if (play.scoring === 'conv1pt') description += ' - Conversão de 1 ponto';
+                        if (play.scoring === 'conv2pt') description += ' - Conversão de 2 pontos';
+                        if (play.flagPullDefender) description += ` | Flag pull: ${play.flagPullDefender.name}`;
                         break;
                     case 'incompletePass':
                         description = `${play.qb.name} erra o passe`;
                         break;
                     case 'run':
-                        description = `${play.runner.name} corre por ${play.yards} jardas${play.touchdown ? ' - TOUCHDOWN!' : ''}`;
-                        break;
-                    case 'flagPull':
-                        description = `${play.defender.name} faz flag pull em ${play.offender.name}`;
+                        description = `${play.runner.name} corre por ${play.yards} jardas`;
+                        if (play.scoring === 'touchdown') description += ' - TOUCHDOWN!';
+                        if (play.scoring === 'conv1pt') description += ' - Conversão de 1 ponto';
+                        if (play.scoring === 'conv2pt') description += ' - Conversão de 2 pontos';
+                        if (play.flagPullDefender) description += ` | Flag pull: ${play.flagPullDefender.name}`;
                         break;
                     case 'sack':
                         description = `${play.defender.name} faz sack em ${play.qb.name}`;
                         break;
                     case 'interception':
                         description = `${play.defender.name} intercepta passe de ${play.qb.name}`;
+                        if (play.defensiveTD) description += ' - TD DEFENSIVO!';
                         break;
                     case 'deflection':
                         description = `${play.defender.name} defleta passe de ${play.qb.name}`;
@@ -1455,9 +1596,6 @@
                     case 'run':
                         this.data.gameMode.step = 'selectRunner';
                         break;
-                    case 'flagPull':
-                        this.data.gameMode.step = 'selectDefender';
-                        break;
                     case 'interception':
                         this.data.gameMode.step = 'selectQB';
                         break;
@@ -1499,13 +1637,13 @@
                     this.data.gameMode.step = 'enterYards';
                 } else if (step === 'selectDefender') {
                     this.data.gameMode.playData.defender = player;
-                    if (this.data.gameMode.playType === 'flagPull') {
-                        this.data.gameMode.step = 'selectOffender';
+                    if (this.data.gameMode.playType === 'interception') {
+                        this.data.gameMode.step = 'defensiveTD';
                     } else {
                         this.data.gameMode.step = 'confirm';
                     }
-                } else if (step === 'selectOffender') {
-                    this.data.gameMode.playData.offender = player;
+                } else if (step === 'selectFlagPullDefender') {
+                    this.data.gameMode.playData.flagPullDefender = player;
                     this.data.gameMode.step = 'confirm';
                 }
                 
@@ -1520,7 +1658,7 @@
                 this.data.gameMode.history.push(this.data.gameMode.step);
                 
                 if (this.data.gameMode.playType === 'completePass' || this.data.gameMode.playType === 'run') {
-                    this.data.gameMode.step = 'touchdown';
+                    this.data.gameMode.step = 'scoringPlay';
                 } else {
                     this.data.gameMode.step = 'confirm';
                 }
@@ -1528,8 +1666,37 @@
                 this.updateGameMode();
             },
             
-            setTouchdown(value) {
-                this.data.gameMode.playData.touchdown = value;
+            setScoring(type) {
+                this.data.gameMode.playData.scoring = type;
+                
+                // Save current step to history
+                this.data.gameMode.history.push(this.data.gameMode.step);
+                
+                // Se foi TD ou conversão, não teve flag pull
+                if (type === 'touchdown' || type === 'conv1pt' || type === 'conv2pt') {
+                    this.data.gameMode.step = 'confirm';
+                } else {
+                    this.data.gameMode.step = 'flagPull';
+                }
+                
+                this.updateGameMode();
+            },
+            
+            setFlagPull(value) {
+                // Save current step to history
+                this.data.gameMode.history.push(this.data.gameMode.step);
+                
+                if (value) {
+                    this.data.gameMode.step = 'selectFlagPullDefender';
+                } else {
+                    this.data.gameMode.step = 'confirm';
+                }
+                
+                this.updateGameMode();
+            },
+            
+            setDefensiveTD(value) {
+                this.data.gameMode.playData.defensiveTD = value;
                 
                 // Save current step to history
                 this.data.gameMode.history.push(this.data.gameMode.step);
@@ -1572,8 +1739,13 @@
                         training.stats[play.data.qb.id].completions = (training.stats[play.data.qb.id].completions || 0) + 1;
                         training.stats[play.data.qb.id].attempts = (training.stats[play.data.qb.id].attempts || 0) + 1;
                         training.stats[play.data.qb.id].passingYards = (training.stats[play.data.qb.id].passingYards || 0) + play.data.yards;
-                        if (play.data.touchdown) {
+                        
+                        if (play.data.scoring === 'touchdown') {
                             training.stats[play.data.qb.id].touchdowns = (training.stats[play.data.qb.id].touchdowns || 0) + 1;
+                        } else if (play.data.scoring === 'conv1pt') {
+                            training.stats[play.data.qb.id].conv1pt = (training.stats[play.data.qb.id].conv1pt || 0) + 1;
+                        } else if (play.data.scoring === 'conv2pt') {
+                            training.stats[play.data.qb.id].conv2pt = (training.stats[play.data.qb.id].conv2pt || 0) + 1;
                         }
                         
                         // Receiver stats
@@ -1581,8 +1753,19 @@
                         training.stats[play.data.receiver.id].receptions = (training.stats[play.data.receiver.id].receptions || 0) + 1;
                         training.stats[play.data.receiver.id].targets = (training.stats[play.data.receiver.id].targets || 0) + 1;
                         training.stats[play.data.receiver.id].receivingYards = (training.stats[play.data.receiver.id].receivingYards || 0) + play.data.yards;
-                        if (play.data.touchdown) {
+                        
+                        if (play.data.scoring === 'touchdown') {
                             training.stats[play.data.receiver.id].touchdowns = (training.stats[play.data.receiver.id].touchdowns || 0) + 1;
+                        } else if (play.data.scoring === 'conv1pt') {
+                            training.stats[play.data.receiver.id].conv1pt = (training.stats[play.data.receiver.id].conv1pt || 0) + 1;
+                        } else if (play.data.scoring === 'conv2pt') {
+                            training.stats[play.data.receiver.id].conv2pt = (training.stats[play.data.receiver.id].conv2pt || 0) + 1;
+                        }
+                        
+                        // Flag pull stats
+                        if (play.data.flagPullDefender) {
+                            if (!training.stats[play.data.flagPullDefender.id]) training.stats[play.data.flagPullDefender.id] = {};
+                            training.stats[play.data.flagPullDefender.id].flagPulls = (training.stats[play.data.flagPullDefender.id].flagPulls || 0) + 1;
                         }
                         break;
                         
@@ -1597,15 +1780,20 @@
                         if (!training.stats[play.data.runner.id]) training.stats[play.data.runner.id] = {};
                         training.stats[play.data.runner.id].rushAttempts = (training.stats[play.data.runner.id].rushAttempts || 0) + 1;
                         training.stats[play.data.runner.id].rushingYards = (training.stats[play.data.runner.id].rushingYards || 0) + play.data.yards;
-                        if (play.data.touchdown) {
-                            training.stats[play.data.runner.id].touchdowns = (training.stats[play.data.runner.id].touchdowns || 0) + 1;
-                        }
-                        break;
                         
-                    case 'flagPull':
-                        // Defender stats
-                        if (!training.stats[play.data.defender.id]) training.stats[play.data.defender.id] = {};
-                        training.stats[play.data.defender.id].flagPulls = (training.stats[play.data.defender.id].flagPulls || 0) + 1;
+                        if (play.data.scoring === 'touchdown') {
+                            training.stats[play.data.runner.id].touchdowns = (training.stats[play.data.runner.id].touchdowns || 0) + 1;
+                        } else if (play.data.scoring === 'conv1pt') {
+                            training.stats[play.data.runner.id].conv1pt = (training.stats[play.data.runner.id].conv1pt || 0) + 1;
+                        } else if (play.data.scoring === 'conv2pt') {
+                            training.stats[play.data.runner.id].conv2pt = (training.stats[play.data.runner.id].conv2pt || 0) + 1;
+                        }
+                        
+                        // Flag pull stats
+                        if (play.data.flagPullDefender) {
+                            if (!training.stats[play.data.flagPullDefender.id]) training.stats[play.data.flagPullDefender.id] = {};
+                            training.stats[play.data.flagPullDefender.id].flagPulls = (training.stats[play.data.flagPullDefender.id].flagPulls || 0) + 1;
+                        }
                         break;
                         
                     case 'sack':
@@ -1623,6 +1811,11 @@
                         // Defender stats
                         if (!training.stats[play.data.defender.id]) training.stats[play.data.defender.id] = {};
                         training.stats[play.data.defender.id].interceptions = (training.stats[play.data.defender.id].interceptions || 0) + 1;
+                        
+                        // TD defensivo
+                        if (play.data.defensiveTD) {
+                            training.stats[play.data.defender.id].touchdowns = (training.stats[play.data.defender.id].touchdowns || 0) + 1;
+                        }
                         break;
                         
                     case 'deflection':
@@ -1681,7 +1874,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `flag-football-${new Date().toISOString().split('T')[0]}.json`;
+                a.download = `gama-flag-football-${new Date().toISOString().split('T')[0]}.json`;
                 a.click();
                 URL.revokeObjectURL(url);
                 
@@ -1749,12 +1942,13 @@
             
             copyToClipboard() {
                 const data = {
+                    version: '1.0',
                     players: this.data.players,
                     trainings: this.data.trainings
                 };
                 
                 const encoded = btoa(JSON.stringify(data));
-                const code = `FFB-${encoded}`;
+                const code = `GFF-${encoded}`;
                 
                 navigator.clipboard.writeText(code).then(() => {
                     this.showToast('📋 Código copiado!');
@@ -1783,7 +1977,7 @@
                 
                 try {
                     let data;
-                    if (code.startsWith('FFB-')) {
+                    if (code.startsWith('GFF-')) {
                         const encoded = code.substring(4);
                         data = JSON.parse(atob(encoded));
                     } else {
@@ -1798,8 +1992,32 @@
             },
             
             importData(data) {
-                if (data.players) this.data.players = data.players;
-                if (data.trainings) this.data.trainings = data.trainings;
+                // Importar jogadores customizados (ID > 22)
+                if (data.players) {
+                    const customPlayers = data.players.filter(p => parseInt(p.id) > 22);
+                    if (customPlayers.length > 0) {
+                        // Remover jogadores customizados existentes
+                        this.data.players = this.data.players.filter(p => parseInt(p.id) <= 22);
+                        // Adicionar novos jogadores customizados
+                        this.data.players = [...this.data.players, ...customPlayers];
+                    }
+                }
+                
+                // Importar treinos
+                if (data.trainings) {
+                    this.data.trainings = data.trainings;
+                }
+                
+                // Se for importação de treino individual
+                if (data.training && !data.trainings) {
+                    // Adicionar o treino importado
+                    const existingIndex = this.data.trainings.findIndex(t => t.id === data.training.id);
+                    if (existingIndex >= 0) {
+                        this.data.trainings[existingIndex] = data.training;
+                    } else {
+                        this.data.trainings.push(data.training);
+                    }
+                }
                 
                 this.saveData();
                 this.closeExportModal();
